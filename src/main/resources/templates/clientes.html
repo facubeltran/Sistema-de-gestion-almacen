@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Negocio</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <ul>
+        <li><a href="http://localhost:8080/">Inicio </a></li>
+        <li><a href="http://localhost:8080/clientes">Clientes </a></li>
+        <li><a href="http://localhost:8080/articulos">Articulos </a></li>
+        <li><a href="http://localhost:8080/facturas">Facturas </a></li>
+        <li>v0.99</li>
+    </ul>
+    <h1>Sistema de Negocio</h1>
+
+    <form th:object="${cliente}" th:action="@{/saveCliente}" method="post">
+        <table>
+            <tr>
+                <td>Nombre:</td>
+                <td><input type="text" th:field="*{nombre}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Apellido:</td>
+                <td><input type="text" th:field="*{apellido}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <td>Estado Civil: </td>
+            <td>
+                <select name="estado" th:value="*{estadoCivil}" style="width: 208px;">
+                    <option th:each="estado : ${estados}"
+                       th:value="${estado}"
+                       th:text="${estado}"/>
+                </select>
+            </td>
+            <tr>
+                <td>Cuit:</td>
+                <td><input type="text" th:field="*{cuit}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Dirección:</td>
+                <td><input type="text" th:field="*{direccion}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Teléfono:</td>
+                <td><input type="text" th:field="*{telefono}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" th:field="*{email}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Comentarios:</td>
+                <td><input type="text" th:field="*{comentarios}" required minlength="3" maxlength="20" style="width: 200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td><input type="reset" value="Limpiar" /></td>
+                <td><input type="submit" value="Guardar" /></td>
+            </tr>
+        </table>
+        <div id='info'><label th:text="${mensajeInfo}"></label></div>
+    </form>
+
+    <div>
+        <form method="get">
+            Buscar Apellido:
+            <input type="text" name="buscarApellido" />
+            <input type="submit" value="Buscar" />
+        </form>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Estado Civil</th>
+                <th>Cuit</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Comentarios</th>
+            </tr>
+            <tr th:each="cliente : ${likeApellido}">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.apellido}"></td>
+                <td th:text="${cliente.estadoCivil}"></td>
+                <td th:text="${cliente.cuit}"></td>
+                <td th:text="${cliente.direccion}"></td>
+                <td th:text="${cliente.telefono}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.comentarios}"></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
