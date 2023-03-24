@@ -25,7 +25,7 @@ public class ControllerWeb{
 	private ClienteDataService clienteService;
 	@Autowired
 	private ArticuloDataService artService;
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String index(@RequestParam(name="nombre", required=false, defaultValue="World") String nombre,Model model){
 		model.addAttribute("nombre",nombre);
 		return "index";
